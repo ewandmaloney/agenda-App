@@ -3,9 +3,9 @@
 @section('content')
   <div class="container">
     <div class="row justify-content-center">
-      <div class="col-md-8">
+      <div class="col-md-4">
         <div class="card">
-          <div class="card-header">Contact Details</div>
+          <div class="card-header text-center">Contact Details</div>
           <div class="card-body">
             <div class="d-flex justify-content-center">
               <img class="profile-picture" src="{{ Storage::url($contact->profile_picture) }}" alt="logo">

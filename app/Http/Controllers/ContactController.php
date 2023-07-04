@@ -76,6 +76,7 @@ class ContactController extends Controller
      */
     public function edit(Contact $contact)
     {
+        $this->authorize('view', $contact);
         $company = Company::all();
         return view('contacts.edit', [
             "contact" => $contact,
