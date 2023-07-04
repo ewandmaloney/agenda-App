@@ -8,7 +8,7 @@
           <div class="card-header">Edit Company</div>
 
           <div class="card-body">
-            <form method="POST" action="{{ route('company.store') }}">
+            <form method="POST" action="{{ route('company.update',  $company->id) }}">
               @csrf
               @method('PUT')
               <div class="row mb-3">

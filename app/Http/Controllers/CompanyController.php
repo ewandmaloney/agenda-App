@@ -15,11 +15,15 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        $text = $_GET['query'];
-        $company = Company::where('name', 'like', '%' . $text . '%')
-            ->orWhere('address', 'like', '%' . $text . '%')
-            ->orWhere('phone_number', 'like', '%' . $text . '%')
-            ->get();
+        if(isset($_GET['query'])){
+            $text = $_GET['query'];
+            $company = Company::where('name', 'like', '%' . $text . '%')
+                ->orWhere('address', 'like', '%' . $text . '%')
+                ->orWhere('phone_number', 'like', '%' . $text . '%')
+                ->get();
+        }else{
+            $company = Company::all();
+        }
         return view('company.index', compact('company'));
     }
 
@@ -79,7 +83,7 @@ class CompanyController extends Controller
     {
         $data = $request->validated();
         $company->update($data);
-        return redirect()->route('home');
+        return redirect()->route('company.index');
     }
 
     /**

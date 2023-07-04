@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreCompanyRequest extends FormRequest
 {
@@ -27,7 +28,18 @@ class StoreCompanyRequest extends FormRequest
             'name' => 'required|string|max:255',
             'address' => 'required|string|max:255',
             'phone_number' => 'required|digits:9',
-            'email' => 'required|string|email|max:255',
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('company')
+                ->ignore(request()->route('company')),
+            ],
+        ];
+    }
+
+    public function messages(){
+        return [
+            'email.unique' => 'You already have an account with this email.',
         ];
     }
 }
